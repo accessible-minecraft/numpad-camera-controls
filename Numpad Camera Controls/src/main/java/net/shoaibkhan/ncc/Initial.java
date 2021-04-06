@@ -10,16 +10,10 @@ import net.minecraft.client.util.InputUtil;
 
 @Environment(EnvType.CLIENT)
 public class Initial implements ClientModInitializer {
-	public static KeyBinding num_0,num_1,num_2,num_3,num_4,num_5,num_6,num_7,num_8,num_9;
+	public static KeyBinding num_1,num_2,num_3,num_4,num_5,num_6,num_7,num_8,num_9;
 	private HudRenderCallbackClass hudRenderCallbackClass;
 	@Override
 	public void onInitializeClient() {
-		num_0 = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"key.nccbyshoaibkhan.num_0",
-				InputUtil.Type.KEYSYM,
-				InputUtil.fromTranslationKey("key.keyboard.keypad.0").getCode(),
-				"category.nccbyshoaibkhan.numpad"
-		));
 
 		num_1 = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"key.nccbyshoaibkhan.num_1",
