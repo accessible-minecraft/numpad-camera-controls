@@ -1,0 +1,12 @@
+{
+  "category.nccbyshoaibkhan.numpad" : "Numpad Camera Controls",
+  "key.nccbyshoaibkhan.num_1" : "Look South",
+  "key.nccbyshoaibkhan.num_7" : "Look North",
+  "key.nccbyshoaibkhan.num_9" : "Look East",
+  "key.nccbyshoaibkhan.num_3" : "1 Look West",
+  "key.nccbyshoaibkhan.num_5" : "Center Camera",
+  "key.nccbyshoaibkhan.num_8" : "Rotate Up",
+  "key.nccbyshoaibkhan.num_2" : "Rotate Down",
+  "key.nccbyshoaibkhan.num_4" : "Rotate Left",
+  "key.nccbyshoaibkhan.num_6" : "Rotate Right"
+}
