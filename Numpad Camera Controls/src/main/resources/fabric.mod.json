@@ -9,17 +9,20 @@
     "Shoaib Khan"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/numpad-keypad-camera-controls/",
+    "sources": "https://github.com/shoaib11120/Numpad-Camera-Controls"
   },
 
   "license": "MIT",
-  "icon": "",
+  "icon": "assets/nccbyshoaibkhan/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "client": [
       "net.shoaibkhan.ncc.Initial"
+    ],
+    "main":[
+      "net.shoaibkhan.ncc.main"
     ]
   },
   "mixins": [
