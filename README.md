@@ -2,9 +2,8 @@
 
 ## Discription
 
-This is a ___Minecraft Fabric___ mod which lets the player control the camera with numpad/keypad keys.
+This is a ___Minecraft Fabric___ mod which lets the player control the camera with numpad/keypad keys. This mod now works with [accessibility plus](https://www.curseforge.com/minecraft/mc-mods/accessibility-plus) mod. All keybindings/hotkeys are re-configurable.
 
-**_Note:- This does not work like bedrock right now. The player does not rotate by 45 degrees instead it makes the player look at the block at 45 degrees._**
 
 [Issues](https://github.com/shoaib11120/Numpad-Camera-Controls/issues) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/numpad-keypad-camera-controls/)
 
