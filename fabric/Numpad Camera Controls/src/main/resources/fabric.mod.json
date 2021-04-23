@@ -19,10 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.shoaibkhan.ncc.Initial"
+      "net.shoaibkhan.ncc.ClientInitializer"
     ],
     "main":[
-      "net.shoaibkhan.ncc.main"
+      "net.shoaibkhan.ncc.MainModInitializer"
     ]
   },
   "mixins": [

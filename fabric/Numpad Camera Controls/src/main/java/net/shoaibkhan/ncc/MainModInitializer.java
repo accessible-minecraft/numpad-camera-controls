@@ -2,7 +2,7 @@ package net.shoaibkhan.ncc;
 
 import net.fabricmc.api.ModInitializer;
 
-public class main implements ModInitializer {
+public class MainModInitializer implements ModInitializer {
 
 	@Override
 	public void onInitialize() {

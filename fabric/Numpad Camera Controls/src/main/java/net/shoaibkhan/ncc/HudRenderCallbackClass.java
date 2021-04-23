@@ -18,7 +18,7 @@ public class HudRenderCallbackClass {
                 try{
                     Vec3d pos = client.player.getPos();
 
-                    while (Initial.centreAxis.wasPressed()) {
+                    while (ClientInitializer.centreAxis.wasPressed()) {
                         // Center Axis
                         int xx = 0, yy = 0, zz = 0;
                         String dir = client.player.getHorizontalFacing().toString().toLowerCase().trim();
@@ -48,7 +48,7 @@ public class HudRenderCallbackClass {
                         client.player.sendMessage(new LiteralText(string), true);
                     }
 
-                    while (Initial.rotateRight.wasPressed()) {
+                    while (ClientInitializer.rotateRight.wasPressed()) {
                         int xx = 0, yy = 0, zz = 0;
                         int angle = (int)client.player.getRotationClient().y;
                         String string = "";
@@ -100,7 +100,7 @@ public class HudRenderCallbackClass {
                         client.player.sendMessage(new LiteralText(string), true);
                     }
                     
-                    while (Initial.rotateLeft.wasPressed()) {
+                    while (ClientInitializer.rotateLeft.wasPressed()) {
                         int xx = 0, yy = 0, zz = 0;
                         int angle = (int)client.player.getRotationClient().y;
                         String string = ""; 
@@ -152,7 +152,7 @@ public class HudRenderCallbackClass {
                         client.player.sendMessage(new LiteralText(string), true);
                     }
                     
-                    while(Initial.rotateDownwards.wasPressed()) {
+                    while(ClientInitializer.rotateDownwards.wasPressed()) {
                         int xx = 0, yy = 0, zz = 0;
                         int angle1 = (int)client.player.getRotationClient().y;
                         String string = ""; 
@@ -188,7 +188,7 @@ public class HudRenderCallbackClass {
                         
                         int angle = (int)client.player.getRotationClient().x;
                        
-                        if(angle<90&&angle>=60) {
+                        if(angle<=90&&angle>=60) {
                         	string = "down";
                         	yy = -30;
                         } else if(angle<60&&angle>=30) {
@@ -211,7 +211,7 @@ public class HudRenderCallbackClass {
                         if(!string.equals("")) client.player.sendMessage(new LiteralText(string), true);
                     }
                     
-                    while(Initial.rotateUp.wasPressed()) {
+                    while(ClientInitializer.rotateUp.wasPressed()) {
                         int xx = 0, yy = 0, zz = 0;
                         int angle1 = (int)client.player.getRotationClient().y;
                         String string = ""; 
@@ -268,28 +268,28 @@ public class HudRenderCallbackClass {
                         if(!string.equals("")) client.player.sendMessage(new LiteralText(string), true);
                     }
 
-                    while (Initial.lookNorth.wasPressed()) {
+                    while (ClientInitializer.lookNorth.wasPressed()) {
                         // Look North
                         Vec3d vec3d = new Vec3d(pos.x+0 , pos.y+0, pos.z-1);
                         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
                         client.player.sendMessage(new LiteralText("north"), true);
                     }
 
-                    while (Initial.lookEast.wasPressed()) {
+                    while (ClientInitializer.lookEast.wasPressed()) {
                         // Look East
                         Vec3d vec3d = new Vec3d(pos.x+1 , pos.y+0, pos.z+0);
                         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
                         client.player.sendMessage(new LiteralText("east"), true);
                     }
 
-                    while (Initial.lookWest.wasPressed()) {
+                    while (ClientInitializer.lookWest.wasPressed()) {
                         // Look West
                         Vec3d vec3d = new Vec3d(pos.x-1 , pos.y+0, pos.z+0);
                         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
                         client.player.sendMessage(new LiteralText("west"), true);
                     }
 
-                    while (Initial.lookSouth.wasPressed()) {
+                    while (ClientInitializer.lookSouth.wasPressed()) {
                         // Look South
                         Vec3d vec3d = new Vec3d(pos.x+0 , pos.y+0, pos.z+1);
                         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);

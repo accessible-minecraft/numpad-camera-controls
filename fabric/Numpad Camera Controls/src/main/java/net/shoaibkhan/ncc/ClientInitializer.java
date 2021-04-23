@@ -8,7 +8,7 @@ import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 
 @Environment(EnvType.CLIENT)
-public class Initial implements ClientModInitializer {
+public class ClientInitializer implements ClientModInitializer {
 	public static KeyBinding lookSouth
 							,rotateDownwards
 							,lookWest
