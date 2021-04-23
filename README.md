@@ -2,7 +2,7 @@
 
 ## Discription
 
-This is a ___Minecraft Fabric___ mod which lets the player control the camera with numpad/keypad keys. This mod now works with [accessibility plus](https://www.curseforge.com/minecraft/mc-mods/accessibility-plus) mod. All keybindings/hotkeys are re-configurable.
+This is a ___Minecraft Fabric___ mod which lets the player control the camera with numpad/keypad keys. This mod now supports with [accessibility plus](https://www.curseforge.com/minecraft/mc-mods/accessibility-plus) mod. All keybindings/hotkeys are re-configurable.
 
 
 [Issues](https://github.com/shoaib11120/Numpad-Camera-Controls/issues) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/numpad-keypad-camera-controls/)
