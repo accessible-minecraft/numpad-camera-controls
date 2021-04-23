@@ -9,7 +9,7 @@ This is a ___Minecraft Fabric___ mod which lets the player control the camera wi
 
 ## Requirements
 
-This mod only requires __[Fabric]()__ to be installed and the required minecraft version is __1.16.x__
+This mod only requires __[Fabric](https://fabricmc.net/wiki/install)__ to be installed and the required minecraft version is __1.16.x__
 
 ## New keybindings/hotkeys
 
