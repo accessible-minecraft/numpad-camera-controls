@@ -2,23 +2,54 @@ package net.shoaibkhan.ncc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.Vec3d;
+import net.shoaibkhan.ncc.mixin.AccessorHandledScreen;
 
 @Environment(EnvType.CLIENT)
-public class HudRenderCallbackClass {
-    private MinecraftClient client;
+public class HudRenderCallbackClass {	
     public HudRenderCallbackClass(){
-        client = MinecraftClient.getInstance();
-        HudRenderCallback.EVENT.register((__,___) -> {
-            if (client.player != null){
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player != null && !(client.currentScreen instanceof AccessorHandledScreen)){
                 try{
-                    Vec3d pos = client.player.getPos();
+                	Vec3d pos = client.player.getPos();
+                    boolean isAltPressed = (InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), InputUtil.fromTranslationKey("key.keyboard.left.alt").getCode())||InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), InputUtil.fromTranslationKey("key.keyboard.right.alt").getCode())) && ClientInitializer.centreAxis.wasPressed(); 
+                    
+                    if(isAltPressed){
+                    	// Center Axis
+                        int xx = 0, yy = 0, zz = 0;
+                        String dir = client.player.getHorizontalFacing().toString().toLowerCase().trim();
+                        String string = "";
+                        if (dir.contains("north")) {
+                        	zz = +1;
+                        	string = "south";
+                        }
+                        else if (dir.contains("south")) {
+                        	zz = -1;
+                        	string = "north";
+                        }
+                        else if (dir.contains("east")) {
+                        	xx = -1;
+                        	string = "west";
+                        }
+                        else if (dir.contains("west")) {
+                        	xx = 01;
+                        	string = "east";
+                        }
+                        else {
+                        	xx = 1;
+                        	string = "east";
+                        }
+                        Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
+                        client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
+                        client.player.sendMessage(new LiteralText(string), true);
+                    }
 
-                    while (ClientInitializer.centreAxis.wasPressed()) {
+                    while (ClientInitializer.centreAxis.wasPressed()&&!isAltPressed) {
                         // Center Axis
                         int xx = 0, yy = 0, zz = 0;
                         String dir = client.player.getHorizontalFacing().toString().toLowerCase().trim();
