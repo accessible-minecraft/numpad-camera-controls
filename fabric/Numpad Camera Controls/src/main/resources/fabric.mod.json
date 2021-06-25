@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Numpad Camera Controls",
-  "description": "This mod adds camera controls to numpad similar to minecraft bedrock!",
+  "description": "This mod adds camera controls to numpad.!",
   "authors": [
     "Shoaib Khan"
   ],
@@ -23,6 +23,9 @@
     ],
     "main":[
       "net.shoaibkhan.ncc.MainModInitializer"
+    ],
+    "cotton-client-commands": [
+    	"net.shoaibkhan.ncc.customCommands"
     ]
   },
   "mixins": [
@@ -32,7 +35,8 @@
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.16.x"
+    "minecraft": "1.17.x",
+    "cotton-client-commands": "^1.0.0"
   },
   "suggests": {
     "another-mod": "*"
