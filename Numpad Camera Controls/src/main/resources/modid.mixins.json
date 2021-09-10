@@ -6,7 +6,6 @@
   "mixins": [
   ],
   "client": [
-    "AccessorHandledScreen"
   ],
   "injectors": {
     "defaultRequire": 1

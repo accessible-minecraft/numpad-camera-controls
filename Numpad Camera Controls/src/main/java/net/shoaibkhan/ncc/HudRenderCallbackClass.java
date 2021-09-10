@@ -5,20 +5,22 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.util.NarratorManager;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.Vec3d;
 import net.shoaibkhan.ncc.config.Config;
-import net.shoaibkhan.ncc.mixin.AccessorHandledScreen;
 
 @Environment(EnvType.CLIENT)
 public class HudRenderCallbackClass {
 	private MinecraftClient client;
+    private NarratorManager narratorManager;
 	
 	public HudRenderCallbackClass(){
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
         	this.client = client;
-            if (client.player != null && !(client.currentScreen instanceof AccessorHandledScreen)){
+            this.narratorManager = NarratorManager.INSTANCE;
+            if (client.player != null && client.currentScreen == null){
                 try{
                 	Vec3d pos = client.player.getPos();
                     boolean isAltPressed = (InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), InputUtil.fromTranslationKey("key.keyboard.left.alt").getCode())||InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), InputUtil.fromTranslationKey("key.keyboard.right.alt").getCode())); 
@@ -82,7 +84,7 @@ public class HudRenderCallbackClass {
                         }
                     }
                 } catch (Exception e) {
-                    System.out.println(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -114,7 +116,7 @@ public class HudRenderCallbackClass {
         }
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
         
 	}
 	
@@ -144,9 +146,9 @@ public class HudRenderCallbackClass {
         }
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
-	
+
 	private void rotateRight(Vec3d pos) {
         int xx = 0, yy = 0, zz = 0;
         int angle = (int)client.player.getRotationClient().y;
@@ -196,13 +198,13 @@ public class HudRenderCallbackClass {
         }
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
-	
+
 	private void rotateLeft(Vec3d pos) {
         int xx = 0, yy = 0, zz = 0;
         int angle = (int)client.player.getRotationClient().y;
-        String string = ""; 
+        String string = "";
         while(angle>=360) angle -= 360;
         while(angle<=-360) angle += 360;
         if((angle>=-150&&angle<=-120)||(angle>=210&&angle<=240)){
@@ -248,16 +250,16 @@ public class HudRenderCallbackClass {
         }
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
-	
+
 	private void rotateDown(Vec3d pos) {
         int xx = 0, yy = 0, zz = 0;
         int angle1 = (int)client.player.getRotationClient().y;
-        String string = ""; 
+        String string = "";
         while(angle1>=360) angle1 -= 360;
         while(angle1<=-360) angle1 += 360;
-        
+
         if(angle1>=-150&&angle1<=-120){
         	// Looking North East
         	zz = -1;
@@ -283,10 +285,10 @@ public class HudRenderCallbackClass {
             else if (dir.contains("west")) xx = -1;
             else xx = 1;
         }
-        
-        
+
+
         int angle = (int)client.player.getRotationClient().x;
-       
+
         if(angle<=90&&angle>=60) {
         	string = "down";
         	yy = -30;
@@ -304,19 +306,19 @@ public class HudRenderCallbackClass {
         } else if(angle<-60&&angle>=-90) {
         	yy = 1;
         }
-        
+
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(!string.equals("")&&Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(!string.equals("")&&Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
-	
+
 	private void rotateUp(Vec3d pos) {
         int xx = 0, yy = 0, zz = 0;
         int angle1 = (int)client.player.getRotationClient().y;
-        String string = ""; 
+        String string = "";
         while(angle1>=360) angle1 -= 360;
         while(angle1<=-360) angle1 += 360;
-        
+
         if(angle1>=-150&&angle1<=-120){
         	// Looking North East
         	zz = -1;
@@ -343,7 +345,7 @@ public class HudRenderCallbackClass {
             else xx = 1;
         }
         int angle = (int)client.player.getRotationClient().x;
-        
+
         if(angle<90&&angle>=60) {
         	yy = -1;
         } else if(angle<60&&angle>=30) {
@@ -361,10 +363,10 @@ public class HudRenderCallbackClass {
         	string = "up";
         	yy = 30;
         }
-        
+
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(!string.equals("")&&Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(!string.equals("")&&Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
 
 	private void rotateRightAlt(Vec3d pos) {
@@ -373,7 +375,7 @@ public class HudRenderCallbackClass {
         String string = "";
         while(angle>=360) angle -= 360;
         while(angle<=-360) angle += 360;
-        
+
         if(angle>=-170&&angle<=-160){
         	zz = -2;
             xx = 1;
@@ -469,16 +471,16 @@ public class HudRenderCallbackClass {
         }
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
-	
+
 	private void rotateLeftAlt(Vec3d pos) {
         int xx = 0, yy = 0, zz = 0;
         int angle = (int)client.player.getRotationClient().y;
         String string = "";
         while(angle>=360) angle -= 360;
         while(angle<=-360) angle += 360;
-        
+
         if(angle>=-170&&angle<=-160){
         	// Look north
         	zz = -1;
@@ -574,22 +576,22 @@ public class HudRenderCallbackClass {
         }
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
-	
+
 	private void rotateDownAlt(Vec3d pos) {
         double xx = 0, yy = 0, zz = 0;
         double angle1 = (int)client.player.getRotationClient().y;
-        String string = ""; 
-        
+        String string = "";
+
         while(angle1>=360) angle1 -= 360;
         while(angle1<=-360) angle1 += 360;
-        
+
         String dir = client.player.getHorizontalFacing().asString();
         dir = dir.toLowerCase().trim();
-        
+
         double angle = (int)client.player.getRotationClient().x;
-        
+
         if(angle1>=-150&&angle1<=-120){
         	// Looking North East
         	zz = -1;
@@ -613,7 +615,7 @@ public class HudRenderCallbackClass {
             else if (dir.contains("west")) xx = -1;
             else xx = 1;
         }
-        
+
         if(angle<=90&&angle>=70) {
         	yy = -30;
         	string = "down";
@@ -746,7 +748,6 @@ public class HudRenderCallbackClass {
         	zz *= 2;
         	xx *= 2;
         } else if(angle<=-85&&angle>=-90) {
-        	yy = 4;
         	if(angle1>=-150&&angle1<=-120) yy = 5;
         	else if(angle1>=-50&&angle1<=-20) yy = 5;
             else if(angle1>=30&&angle1<=60) yy = 5;
@@ -759,25 +760,25 @@ public class HudRenderCallbackClass {
                 else yy = 4;
             }
         }
-        
+
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(!string.equals("")&&Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(!string.equals("")&&Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
-	
+
 	private void rotateUpAlt(Vec3d pos) {
         double xx = 0, yy = 0, zz = 0;
         double angle1 = (int)client.player.getRotationClient().y;
-        String string = ""; 
-        
+        String string = "";
+
         while(angle1>=360) angle1 -= 360;
         while(angle1<=-360) angle1 += 360;
-        
+
         String dir = client.player.getHorizontalFacing().asString();
         dir = dir.toLowerCase().trim();
-        
+
         double angle = (int)client.player.getRotationClient().x;
-        
+
         if(angle1>=-150&&angle1<=-120){
         	// Looking North East
         	zz = -1;
@@ -801,9 +802,8 @@ public class HudRenderCallbackClass {
             else if (dir.contains("west")) xx = -1;
             else xx = 1;
         }
-        
+
         if(angle<=90&&angle>=85) {
-        	yy = -4;
         	if(angle1>=-150&&angle1<=-120) yy = -5;
         	else if(angle1>=-50&&angle1<=-20) yy = -5;
             else if(angle1>=30&&angle1<=60) yy = -5;
@@ -856,7 +856,6 @@ public class HudRenderCallbackClass {
                 else yy = -1;
             }
         } else if(angle<=35&&angle>=25) {
-        	yy = -1;
         	zz *= 4;
         	xx *= 4;
         	if(angle1>=-150&&angle1<=-120) yy = -1.5;
@@ -947,10 +946,10 @@ public class HudRenderCallbackClass {
         	yy = 30;
         	string = "up";
         }
-        
+
         Vec3d vec3d = new Vec3d(pos.x+xx , pos.y+yy, pos.z+zz);
         client.player.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET,vec3d);
-        if(!string.equals("")&&Config.get(Config.getNarratorkey())) client.player.sendMessage(new LiteralText(string), true);
+        if(!string.equals("")&&Config.get(Config.getNarratorkey())) narratorManager.narrate(string);
 	}
     
 	private void lookNorth(Vec3d pos) {

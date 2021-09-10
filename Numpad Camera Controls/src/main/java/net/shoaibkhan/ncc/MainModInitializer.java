@@ -7,7 +7,6 @@ public class MainModInitializer implements ModInitializer {
   @Override
   public void onInitialize() {
     Config.loadConfig();
-    System.out.println("Numpad Camera Controls");
   }
 
 }

@@ -5,14 +5,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
+//import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 
 @Environment(EnvType.CLIENT)
 public class ClientInitializer implements ClientModInitializer {
   public static KeyBinding lookSouth, rotateDownwards, lookWest, rotateLeft, centreAxis, rotateRight, lookNorth,
       rotateUp, lookEast;
-  @SuppressWarnings("unused")
-  private HudRenderCallbackClass hudRenderCallbackClass;
 
   @Override
   public void onInitializeClient() {
@@ -37,6 +36,6 @@ public class ClientInitializer implements ClientModInitializer {
     lookEast = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.nccbyshoaibkhan.num_9", InputUtil.Type.KEYSYM,
         InputUtil.fromTranslationKey("key.keyboard.keypad.9").getCode(), "category.nccbyshoaibkhan.numpad"));
 
-    hudRenderCallbackClass = new HudRenderCallbackClass();
+    new HudRenderCallbackClass();
   }
 }
