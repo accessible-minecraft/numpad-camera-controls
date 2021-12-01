@@ -3,10 +3,16 @@ package net.shoaibkhan.ncc;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.client.option.KeyBinding;
 //import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.util.NarratorManager;
+import net.shoaibkhan.ncc.config.Config;
+
+import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
 
 @Environment(EnvType.CLIENT)
 public class ClientInitializer implements ClientModInitializer {
@@ -15,6 +21,21 @@ public class ClientInitializer implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
+
+    ClientCommandManager.DISPATCHER.register(literal("ncc").then(literal("narrator")
+            .then(literal("off").executes(
+                    source -> {
+                      Config.set(Config.getNarratorkey(), false);
+                      NarratorManager.INSTANCE.narrate("Narrator off");
+                      return 1;
+                    }))
+            .then(literal("on").executes(
+                    source -> {
+                      Config.set(Config.getNarratorkey(), true);
+                      NarratorManager.INSTANCE.narrate("Narrator off");
+                      return 1;
+                    }))
+    ));
 
     lookSouth = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.nccbyshoaibkhan.num_1", InputUtil.Type.KEYSYM,
         InputUtil.fromTranslationKey("key.keyboard.keypad.1").getCode(), "category.nccbyshoaibkhan.numpad"));

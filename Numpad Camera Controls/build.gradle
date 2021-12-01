@@ -1,8 +1,13 @@
-// 1.17
+// 1.18
 plugins {
-	id 'fabric-loom' version '0.9.+'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
 }
+// 1.17
+//plugins {
+//	id 'fabric-loom' version '0.9.+'
+//	id 'maven-publish'
+//}
 
 // 1.16
 //plugins {
@@ -10,18 +15,18 @@ plugins {
 //	id 'maven-publish'
 //}
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
 repositories {
-	maven {
-		name = "CottonMC"
-		url = "https://server.bbkr.space/artifactory/libs-release"
-	}
+//	maven {
+//		name = "CottonMC"
+//		url = "https://server.bbkr.space/artifactory/libs-release"
+//	}
 }
 
 // 1.16
@@ -32,21 +37,28 @@ repositories {
 //
 //	//Fabric api
 //	modImplementation "net.fabricmc.fabric-api:fabric-api:0.32.5+1.16"
-//	modImplementation include("io.github.cottonmc:cotton-client-commands:1.0.1+1.16-rc1")
 //}
 
 
 // 1.17
+//dependencies {
+//    minecraft "com.mojang:minecraft:1.17.1"
+//    mappings "net.fabricmc:yarn:1.17.1+build.1:v2"
+//    modImplementation "net.fabricmc:fabric-loader:0.11.6"
+//
+//    //Fabric api
+//    modImplementation "net.fabricmc.fabric-api:fabric-api:0.36.1+1.17"
+//}
+
+// 1.18
 dependencies {
-    minecraft "com.mojang:minecraft:1.17.1"
-    mappings "net.fabricmc:yarn:1.17.1+build.1:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.11.6"
+	minecraft "com.mojang:minecraft:1.18"
+	mappings "net.fabricmc:yarn:1.18+build.1:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.12.8"
 
-    //Fabric api
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.36.1+1.17"
-	  modImplementation include("io.github.cottonmc:cotton-client-commands:1.0.1+1.16-rc1")
+	//Fabric api
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.43.1+1.18"
 }
-
 
 processResources {
 	inputs.property "version", project.version
@@ -58,7 +70,7 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-	def targetVersion = 8
+	def targetVersion = 17
 	if (JavaVersion.current().isJava9Compatible()) {
 		 it.options.release = targetVersion
 	}
