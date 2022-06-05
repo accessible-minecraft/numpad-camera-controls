@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.resource.language.I18n;
 //import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.NarratorManager;
@@ -20,18 +21,19 @@ public class ClientInitializer implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
-
+    Config.loadConfig();
+    
     ClientCommandManager.DISPATCHER.register(literal("ncc").then(literal("narrator")
             .then(literal("off").executes(
                     source -> {
                       Config.set(Config.getNarratorkey(), false);
-                      NarratorManager.INSTANCE.narrate("Narrator off");
+                      NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOn"));
                       return 1;
                     }))
             .then(literal("on").executes(
                     source -> {
                       Config.set(Config.getNarratorkey(), true);
-                      NarratorManager.INSTANCE.narrate("Narrator on");
+                      NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOff"));
                       return 1;
                     }))
     ));

@@ -8,5 +8,18 @@
   "key.nccbyshoaibkhan.num_8" : "Rotate Up",
   "key.nccbyshoaibkhan.num_2" : "Rotate Down",
   "key.nccbyshoaibkhan.num_4" : "Rotate Left",
-  "key.nccbyshoaibkhan.num_6" : "Rotate Right"
+  "key.nccbyshoaibkhan.num_6" : "Rotate Right",
+  "narrate.nccbyshoaibkhan.narratorOn" : "Narrator on",
+  "narrate.nccbyshoaibkhan.narratorOff" : "Narrator off",
+  "narrate.nccbyshoaibkhan.north": "North",
+  "narrate.nccbyshoaibkhan.south": "South",
+  "narrate.nccbyshoaibkhan.west": "West",
+  "narrate.nccbyshoaibkhan.east": "East",
+  "narrate.nccbyshoaibkhan.north-east": "North-East",
+  "narrate.nccbyshoaibkhan.south-east": "South-East",
+  "narrate.nccbyshoaibkhan.north-west": "North-West",
+  "narrate.nccbyshoaibkhan.south-west": "South-West",
+  "narrate.nccbyshoaibkhan.up": "Up",
+  "narrate.nccbyshoaibkhan.down": "Down",
+  "narrate.nccbyshoaibkhan.straight": "Straight"
 }
