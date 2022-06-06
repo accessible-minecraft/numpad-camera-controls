@@ -3,6 +3,7 @@ package net.shoaibkhan.ncc;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.NarratorManager;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.shoaibkhan.ncc.config.Config;
 
@@ -17,23 +18,20 @@ public class BridgingAngle {
     private void main(){
         assert client.player != null;
         int xx = 0, yy = 0, zz = 0;
-        String dir = client.player.getHorizontalFacing().toString().toLowerCase().trim();
+        Direction dir = client.player.getHorizontalFacing();
         Vec3d pos = client.player.getPos();
 
-        if (dir.contains("north")) {
+        if (dir == Direction.NORTH) {
             zz = -2;
         }
-        else if (dir.contains("south")) {
+        else if (dir == Direction.SOUTH) {
             zz = 2;
         }
-        else if (dir.contains("east")) {
+        else if (dir == Direction.EAST) {
             xx = 2;
         }
-        else if (dir.contains("west")) {
+        else if (dir == Direction.WEST) {
             xx = -2;
-        }
-        else {
-            xx = 2;
         }
 
         yy = -9;
