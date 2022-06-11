@@ -1,5 +1,9 @@
 # gradle
 
+*.swp
+
+remappedSrc/
+
 .gradle/
 build/
 out/
