@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "nccbyshoaibkhan",
   "version": "${version}",
-
   "name": "Numpad Camera Controls",
   "description": "This mod adds camera controls to numpad!",
   "authors": [
@@ -13,20 +12,14 @@
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/numpad-keypad-camera-controls/",
     "sources": "https://github.com/accessible-minecraft/numpad-camera-controls"
   },
-
   "license": "MIT",
   "icon": "assets/nccbyshoaibkhan/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "client": [
       "net.shoaibkhan.ncc.ClientInitializer"
-    ],
-    "cotton-client-commands": [
-    	"net.shoaibkhan.ncc.customCommands"
     ]
   },
-
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",

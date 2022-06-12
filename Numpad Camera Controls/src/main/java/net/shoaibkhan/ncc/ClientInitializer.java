@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.resource.language.I18n;
-//import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.NarratorManager;
 import net.shoaibkhan.ncc.config.Config;
@@ -41,23 +40,37 @@ public class ClientInitializer implements ClientModInitializer {
                             return 1;
                         }))
         ));
-        */
+        ClientCommandManager.DISPATCHER.register(literal("ba").executes(
+                source -> {
+                    new BridgingAngle();
+                    return 1;
+                }));
+         */
 
         // post 1.19
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(literal("ncc").then(literal("narrator")
-                .then(literal("off").executes(
-                        source -> {
-                            Config.set(Config.getNarratorkey(), false);
-                            NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOff"));
-                            return 1;
-                        }))
-                .then(literal("on").executes(
-                        source -> {
-                            Config.set(Config.getNarratorkey(), true);
-                            NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOn"));
-                            return 1;
-                        }))
-        )));
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+            dispatcher.register(
+                    literal("ncc")
+                            .then(literal("narrator")
+                                    .then(literal("off").executes(
+                                            source -> {
+                                                Config.set(Config.getNarratorkey(), false);
+                                                NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOff"));
+                                                return 1;
+                                            }))
+                                    .then(literal("on").executes(
+                                            source -> {
+                                                Config.set(Config.getNarratorkey(), true);
+                                                NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOn"));
+                                                return 1;
+                                            }))
+                            ));
+            dispatcher.register(literal("ba").executes(
+                    source -> {
+                        new BridgingAngle();
+                        return 1;
+                    }));
+        });
 
         lookSouth = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.nccbyshoaibkhan.num_1", InputUtil.Type.KEYSYM,
                 InputUtil.fromTranslationKey("key.keyboard.keypad.1").getCode(), "category.nccbyshoaibkhan.numpad"));

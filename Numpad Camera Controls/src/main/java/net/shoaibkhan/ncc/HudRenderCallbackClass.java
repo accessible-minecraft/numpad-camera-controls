@@ -11,7 +11,6 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.NarratorManager;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
@@ -98,7 +97,7 @@ public class HudRenderCallbackClass {
     private void narrate(String key) {
         if (key.trim().equals(""))
             return;
-        
+
         if (Config.get(Config.getNarratorkey())) {
             key = "narrate.nccbyshoaibkhan." + key;
             narratorManager.narrate(I18n.translate(key));
