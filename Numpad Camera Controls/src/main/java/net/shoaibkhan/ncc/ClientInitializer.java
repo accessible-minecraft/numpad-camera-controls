@@ -3,17 +3,12 @@ package net.shoaibkhan.ncc;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-//import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.NarratorManager;
 import net.shoaibkhan.ncc.config.Config;
-
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
-//import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
 
 @Environment(EnvType.CLIENT)
 public class ClientInitializer implements ClientModInitializer {
@@ -25,47 +20,45 @@ public class ClientInitializer implements ClientModInitializer {
         Config.loadConfig();
 
         // pre 1.19
-        /*
-        ClientCommandManager.DISPATCHER.register(literal("ncc").then(literal("narrator")
-                .then(literal("off").executes(
+        /*net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.DISPATCHER.register(net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal("ncc").then(net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal("narrator")
+                .then(net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal("off").executes(
                         source -> {
                             Config.set(Config.getNarratorkey(), false);
                             NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOff"));
                             return 1;
                         }))
-                .then(literal("on").executes(
+                .then(net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal("on").executes(
                         source -> {
                             Config.set(Config.getNarratorkey(), true);
                             NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOn"));
                             return 1;
                         }))
         ));
-        ClientCommandManager.DISPATCHER.register(literal("ba").executes(
+        net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.DISPATCHER.register(net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal("ba").executes(
                 source -> {
                     new BridgingAngle();
                     return 1;
-                }));
-         */
+                }));*/
 
         // post 1.19
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+        net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             dispatcher.register(
-                    literal("ncc")
-                            .then(literal("narrator")
-                                    .then(literal("off").executes(
+                    net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("ncc")
+                            .then(net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("narrator")
+                                    .then(net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("off").executes(
                                             source -> {
                                                 Config.set(Config.getNarratorkey(), false);
                                                 NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOff"));
                                                 return 1;
                                             }))
-                                    .then(literal("on").executes(
+                                    .then(net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("on").executes(
                                             source -> {
                                                 Config.set(Config.getNarratorkey(), true);
                                                 NarratorManager.INSTANCE.narrate(I18n.translate("narrate.nccbyshoaibkhan.narratorOn"));
                                                 return 1;
                                             }))
                             ));
-            dispatcher.register(literal("ba").executes(
+            dispatcher.register(net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("ba").executes(
                     source -> {
                         new BridgingAngle();
                         return 1;
